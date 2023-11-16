@@ -14,6 +14,11 @@ describe("App", () => {
     const input = screen.getByTestId("search")
     expect(input).toBeInTheDocument()
   })
+  it("Contain input have focus", () => {
+    render(<App />)
+    const input = screen.getByTestId("search")
+    expect(input.matches(':focus')).toBe(true)
+  })
   it("Contain button", () => {
     render(<App />)
     const button = screen.getByTestId("go")
