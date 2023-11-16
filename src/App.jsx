@@ -4,6 +4,9 @@ function App () {
   return (
     <>
       TH Students Homework
+      <hr />
+      <input autoFocus data-testid="search" />
+      <button data-testid="go">Go</button>
     </>
   )
 }
