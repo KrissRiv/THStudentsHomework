@@ -11,7 +11,6 @@ function App() {
 
   const onSearchKeyUp = (e) => {
     if (e.key === "Enter") {
-      debugger;
       onSearch(e);
       handlerSearch();
     }
