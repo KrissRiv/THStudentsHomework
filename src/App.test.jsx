@@ -41,7 +41,7 @@ describe("App", () => {
     const input = screen.getByTestId("search")
 
     fireEvent.change(input, { target: { value: mockValue } });
-    fireEvent.keyPress(input, { key: 'Enter', keyCode: 13 })
+    fireEvent.keyUp(input, { key: 'Enter', keyCode: 13 })
 
     const courses = screen.getByTestId("courses-collection");
 
