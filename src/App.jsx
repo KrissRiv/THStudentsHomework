@@ -4,6 +4,8 @@ function App () {
   return (
     <>
       TH Students Homework
+      <hr />
+      <input data-testid="search" />
     </>
   )
 }
