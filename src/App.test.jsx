@@ -9,4 +9,9 @@ describe("App", () => {
     const heading = screen.getByText("TH Students Homework")
     expect(heading).toBeInTheDocument()
   })
+  it("Contain input", () => {
+    render(<App />)
+    const input = screen.getByTestId("search")
+    expect(input).toBeInTheDocument()
+  })
 });
