@@ -6,6 +6,7 @@ function App () {
       TH Students Homework
       <hr />
       <input data-testid="search" />
+      <button data-testid="go">Go</button>
     </>
   )
 }
