@@ -33,6 +33,20 @@ describe("App", () => {
 
     expect(courses).toBeInTheDocument();
   })
+  it("Contain list collection after search action when press enter key", () => {
+    const mockValue = "search term";
+
+    render(<App />)
+    const button = screen.getByTestId("go")
+    const input = screen.getByTestId("search")
+
+    fireEvent.change(input, { target: { value: mockValue } });
+    fireEvent.keyPress(input, { key: 'Enter', keyCode: 13 })
+
+    const courses = screen.getByTestId("courses-collection");
+
+    expect(courses).toBeInTheDocument();
+  })
   it("Contain button", () => {
     render(<App />)
     const button = screen.getByTestId("go")
