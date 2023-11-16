@@ -1,9 +1,26 @@
-import { useState } from "react";
+import { React, useState } from "react";
 import "./App.css";
 
-function App() {
+function App({url}) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [listItems, setListItms] = useState([]);
+  const [listItems, setListItems] = useState(null);
+
+  const getCourses = async () => {
+    try {
+      const response = await fetch(
+        `${url}${searchTerm}`
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      setListItems(data);
+    } catch (error) {
+      console.error("Error ", error);
+    }
+  };
 
   const onSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -16,8 +33,20 @@ function App() {
     }
   };
 
+  const getList = () => {
+    return (
+      <ul data-testid="courses-collection">
+        {listItems.map((item) => (
+          <li key={item.id} data-testid="course">
+            {item.name}
+          </li>)
+        )}
+      </ul>
+    );
+  }
+
   const handlerSearch = () => {
-    setListItms([searchTerm]);
+    getCourses();
   };
 
   return (
@@ -33,11 +62,7 @@ function App() {
       <button onClick={handlerSearch} data-testid="go">
         Go
       </button>
-      {listItems.length > 0 && (
-        <ul data-testid="courses-collection">
-          <li data-testid="course"></li>
-        </ul>
-      )}
+      {listItems && getList()}
     </>
   );
 }
