@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 import { client } from "./services/courses-service";
 import ListParent from "./components/molecules/list-parent";
@@ -7,6 +8,7 @@ import "./App.css";
 
 function App() {
   const [isLoading, setLoading] = useState(false);
+  const [isError, setError] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [listItems, setListItems] = useState([]);
   const [listParentItems, setListParentItems] = useState([]);
@@ -15,8 +17,9 @@ function App() {
     client
       .get(`?query=${searchTerm}`)
       .then((response) => {
+        setError(false);
         if (response.status !== 200) {
-          throw new Error("Network response was not ok");
+          setError(true);
         }
         const data = response.data;
         const parents = data.filter((item) => item.parent_id === 0);
@@ -40,7 +43,7 @@ function App() {
         setListParentItems(list);
       })
       .catch((error) => {
-        throw new Error("Network response was not ok");
+        setError(true);
       })
       .finally(() => setLoading(false));
   };
@@ -57,21 +60,47 @@ function App() {
 
   return (
     <>
-      TH Students Homework
+      <h1>TH Students Homework</h1>
       <hr />
       <form onSubmit={handlerSubmit}>
-        <input
-          name="search"
-          onChange={handlerInput}
-          autoFocus
-          data-testid="search"
-        />
-        <button type="submit" data-testid="go">
-          Go
-        </button>
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="What do you learn today?"
+            aria-label="Recipient's username"
+            aria-describedby="button-addon2"
+            name="search"
+            onChange={handlerInput}
+            autoFocus
+            data-testid="search"
+          />
+          <button
+            class="btn btn-primary btn-outline-secondary text-white"
+            type="submit"
+            id="button-addon2"
+            data-testid="go"
+          >
+            Go
+          </button>
+        </div>
       </form>
       {isLoading && <p>Loading...</p>}
-      {listParentItems?.length > 0 && (
+      {isError && (
+        <div class="alert alert-danger" role="alert">
+          ERROR: Ups! I did it again! Please refresh after 10 seconds
+        </div>
+      )}
+      {isLoading && (
+        <Player
+          src="https://assets1.lottiefiles.com/packages/lf20_myejiggj.json"
+          className="player"
+          loop
+          autoplay
+          style={{ height: "200px", width: "200px" }}
+        />
+      )}
+      {!isLoading && !isError && listParentItems?.length > 0 && (
         <ul data-testid="courses-collection">
           <ListParent listItems={listItems} listParentItems={listParentItems} />
         </ul>
