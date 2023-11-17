@@ -7,16 +7,33 @@ function App({url}) {
 
   const getCourses = async () => {
     try {
-      const response = await fetch(
-        `${url}${searchTerm}`
-      );
+      const response = await fetch(`${url}${searchTerm}`);
+      console.log("response ", response);
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
 
       const data = await response.json();
-      setListItems(data);
+      const parents = data.filter((item) => item.parent_id === 0);
+      const list = [];
+      const restList = [];
+      parents.forEach((itemList) => {
+        list.push({
+          ...itemList,
+          childs: data.filter((item) => item.parent_id === itemList.id),
+        });
+      });
+      list.forEach((item) =>
+        item.childs.map((child) => {
+          restList.push({
+            ...child,
+            childs: data.filter((item) => item.parent_id === child.id),
+          });
+        })
+      );
+      setListItems(restList);
+      setListParentItems(list);
     } catch (error) {
       console.error("Error ", error);
     }
