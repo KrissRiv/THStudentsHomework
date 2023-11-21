@@ -1,6 +1,5 @@
-import { React } from "react";
-
-function ItemChild({id, name: text }) {
+// eslint-disable-next-line react/prop-types
+function ItemChild({id, name:text }) {
   return(<li key={id}>{text}</li>);
 }
 

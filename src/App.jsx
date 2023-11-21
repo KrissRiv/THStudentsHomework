@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 
 import { client } from "./services/courses-service";
@@ -38,7 +38,7 @@ function App() {
         setListItems(restList);
         setListParentItems(list);
       })
-      .catch((error) => {
+      .catch(() => {
         setError(true);
       })
       .finally(() => setLoading(false));

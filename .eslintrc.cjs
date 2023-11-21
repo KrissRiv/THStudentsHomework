@@ -8,7 +8,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:vitest/recommended",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
+  ignorePatterns: ["docs", "html", "coverage", "cypress", ".eslintrc.cjs", "*.config.js", "__tests__"],
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
   settings: { react: { version: "18.2" } },
   plugins: ["react-refresh"],
