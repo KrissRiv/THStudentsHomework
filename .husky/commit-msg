@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run test:husky
-npx --no-install lint-staged
+npm lint && npx --no-install commitlint --edit "$1"
