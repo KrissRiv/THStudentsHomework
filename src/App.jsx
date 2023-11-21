@@ -17,10 +17,6 @@ function App() {
     client
       .get(`?query=${searchTerm}`)
       .then((response) => {
-        setError(false);
-        if (response.status !== 200) {
-          setError(true);
-        }
         const data = response.data;
         const parents = data.filter((item) => item.parent_id === 0);
         const list = [];
@@ -53,20 +49,21 @@ function App() {
   };
 
   const handlerSubmit = (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
+    setError(false);
     getCourses();
   };
 
   return (
     <>
-      <h1>TH Students Homework</h1>
+      <h1 data-testid="title">TH Students Homework</h1>
       <hr />
       <form onSubmit={handlerSubmit}>
-        <div class="input-group mb-3">
+        <div className="input-group mb-3">
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="What do you learn today?"
             aria-label="Recipient's username"
             aria-describedby="button-addon2"
@@ -76,7 +73,7 @@ function App() {
             data-testid="search"
           />
           <button
-            class="btn btn-primary btn-outline-secondary text-white"
+            className="btn btn-primary btn-outline-secondary text-white"
             type="submit"
             id="button-addon2"
             data-testid="go"
@@ -87,7 +84,7 @@ function App() {
       </form>
       {isLoading && <p>Loading...</p>}
       {isError && (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           ERROR: Ups! I did it again! Please refresh after 10 seconds
         </div>
       )}
