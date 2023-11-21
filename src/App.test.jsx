@@ -98,8 +98,6 @@ describe("App", () => {
 
     await waitForElementToBeRemoved(() => screen.queryByText("Loading..."));
 
-    screen.debug();
-
     expect(
       screen.getByText(
         "ERROR: Ups! I did it again! Please refresh after 10 seconds"
