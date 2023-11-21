@@ -1,4 +1,3 @@
-import { React } from "react";
 import { v4 as uuid } from 'uuid';
 
 import ItemChild from "../atoms/item-child";
@@ -17,7 +16,7 @@ function ListParent({ listItems, listParentItems }) {
     return listItems.map(
       (item) =>
         item.childs.length > 0 && (
-          <ul>
+          <ul key={uuid()}>
             {item.childs.map(
               (child) =>
                 child.parent_id === id && (
@@ -35,6 +34,6 @@ function ListParent({ listItems, listParentItems }) {
       {child.childs.length > 0 && <ul>{getChilds(child.childs)}</ul>}
     </>
   ));
-};
+}
 
 export default ListParent;

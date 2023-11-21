@@ -32,7 +32,6 @@ export default defineConfig({
       provider: "istanbul", // or 'v8'
       reporter: ['text', 'json', 'html'],
     },
-    reporters: ['html'],
     globals: true,
     environment: "jsdom",
     setupFiles: ["./src/setupTests.js"],
