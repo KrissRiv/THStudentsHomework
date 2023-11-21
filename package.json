@@ -9,11 +9,13 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest --ui --coverage.enabled",
-    "test:u": "vitest -u", // use this for update snapshots if the app have new changes
+    "test:husky": "vitest run",
+    "test:u": "vitest -u",
     "cy:open-e2e": "cypress open --e2e --browser chrome",
     "cy:open-unit": "cypress open --component --browser chrome",
     "cy:run-e2e": "cypress run --e2e",
-    "cy:run-unit": "cypress run --component"
+    "cy:run-unit": "cypress run --component",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.5.3",
@@ -44,6 +46,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "eslint-plugin-vitest": "^0.3.9",
+    "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "msw": "^2.0.7",
     "vite": "^4.5.0",
