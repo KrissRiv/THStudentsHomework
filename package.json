@@ -8,9 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest",
-    "test:u": "vitest -u",
-    "test:ui": "vitest --ui --coverage.enabled",
+    "test": "vitest --ui --coverage.enabled",
+    "test:u": "vitest -u", // use this for update snapshots if the app have new changes
     "cy:open-e2e": "cypress open --e2e --browser chrome",
     "cy:open-unit": "cypress open --component --browser chrome",
     "cy:run-e2e": "cypress run --e2e",
